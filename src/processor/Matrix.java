@@ -38,8 +38,9 @@ class Matrix {
             for (int el : row) {
                 result.append(el).append(" ");
             }
+            result.setLength(result.length() - 1);
             result.append("\n");
         }
-        return result.toString().stripTrailing();
+        return result.toString();
     }
 }
