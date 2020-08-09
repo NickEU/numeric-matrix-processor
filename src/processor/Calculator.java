@@ -19,4 +19,16 @@ class Calculator {
 
         return Optional.of(result);
     }
+
+    static Matrix multiplyMatrixByConst(Matrix a, int constant) {
+        int rows = a.getRows();
+        int cols = a.getColumns();
+        var result = new Matrix(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.setElement(i, j, a.getElement(i, j) * constant);
+            }
+        }
+        return result;
+    }
 }

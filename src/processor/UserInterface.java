@@ -3,6 +3,7 @@ package processor;
 import java.util.Optional;
 import java.util.Scanner;
 
+
 class UserInterface {
     private final Scanner sc = new Scanner(System.in);
 
@@ -24,5 +25,12 @@ class UserInterface {
             }
         }
         return result;
+    }
+
+    public void runStage2() {
+        Matrix a = readMatrixFromUser();
+        int constant = sc.nextInt();
+        Matrix result = Calculator.multiplyMatrixByConst(a, constant);
+        System.out.println("\n" + result);
     }
 }
