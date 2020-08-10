@@ -94,19 +94,19 @@ class Calculator {
     }
 
     private static void transposeSideDiag(Matrix result, Matrix toBeTransposed) {
-        for (int j = result.getColumns() - 1; j >= 0; j--) {
-            for (int i = result.getRows() - 1; i >= 0; i--) {
-                result.setElement(i, j, toBeTransposed.getElement
-                    (toBeTransposed.getRows() - 1 - j,
-                        toBeTransposed.getColumns() - 1 - i));
+        for (int col = result.getColumns() - 1; col >= 0; col--) {
+            for (int row = result.getRows() - 1; row >= 0; row--) {
+                result.setElement(row, col, toBeTransposed.getElement
+                    (toBeTransposed.getRows() - 1 - col,
+                        toBeTransposed.getColumns() - 1 - row));
             }
         }
     }
 
     private static void transposeMainDiag(Matrix result, Matrix toBeTransposed) {
-        for (int j = 0; j < result.getColumns(); j++) {
-            for (int i = 0; i < result.getRows(); i++) {
-                result.setElement(i, j, toBeTransposed.getElement(j, i));
+        for (int col = 0; col < result.getColumns(); col++) {
+            for (int row = 0; row < result.getRows(); row++) {
+                result.setElement(row, col, toBeTransposed.getElement(col, row));
             }
         }
     }
