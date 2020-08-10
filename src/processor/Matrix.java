@@ -36,7 +36,7 @@ class Matrix {
         var result = new StringBuilder();
         for (double[] row : matrix) {
             for (double el : row) {
-                result.append(Double.valueOf(el).longValue() == Math.round(el)
+                result.append(el == (double) Math.round(el)
                     ? String.format("%.0f", el) : el);
                 result.append(" ");
             }
