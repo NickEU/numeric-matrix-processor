@@ -55,6 +55,47 @@ class Calculator {
     }
 
     public static Matrix transposeMatrix(Matrix toBeTransposed, Transposition type) {
+        Matrix result = toBeTransposed;
+        switch (type) {
+            case MAIN_DIAGONAL:
+                result = transposeMainDiag(toBeTransposed);
+                break;
+            case SIDE_DIAGONAL:
+                result = transposeSideDiag(toBeTransposed);
+                break;
+            case HORIZONTAL_LINE:
+                result = transposeHorizontalLine(toBeTransposed);
+                break;
+            case VERTICAL_LINE:
+                result = transposeVerticalLine(toBeTransposed);
+                break;
+        }
+        return result;
+    }
+
+    private static Matrix transposeVerticalLine(Matrix toBeTransposed) {
         return toBeTransposed;
+    }
+
+    private static Matrix transposeHorizontalLine(Matrix toBeTransposed) {
+        return toBeTransposed;
+    }
+
+    private static Matrix transposeSideDiag(Matrix toBeTransposed) {
+        return toBeTransposed;
+    }
+
+    private static Matrix transposeMainDiag(Matrix toBeTransposed) {
+        int rows = toBeTransposed.getColumns();
+        int cols = toBeTransposed.getRows();
+        Matrix result = new Matrix(rows, cols);
+
+        for (int j = 0; j < cols; j++) {
+            for (int i = 0; i < rows; i++) {
+                result.setElement(i, j, toBeTransposed.getElement(j, i));
+            }
+        }
+
+        return result;
     }
 }
