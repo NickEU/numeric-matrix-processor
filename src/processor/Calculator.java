@@ -20,7 +20,7 @@ class Calculator {
         return Optional.of(result);
     }
 
-    static Matrix multiplyMatrixByConst(Matrix a, int constant) {
+    static Matrix multiplyMatrixByConst(Matrix a, double constant) {
         int rows = a.getRows();
         int cols = a.getColumns();
         var result = new Matrix(rows, cols);

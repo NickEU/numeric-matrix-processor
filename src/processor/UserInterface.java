@@ -1,10 +1,11 @@
 package processor;
 
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Scanner;
 
 class UserInterface {
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in).useLocale(Locale.US);
 
     public void runMainMenuLoop() {
         while (true) {
@@ -42,7 +43,7 @@ class UserInterface {
 
     public void menuMultiplyByConstant() {
         Matrix a = readMatrixFromUser();
-        int constant = sc.nextInt();
+        double constant = sc.nextDouble();
         Matrix result = Calculator.multiplyMatrixByConst(a, constant);
         System.out.println("\n" + result);
     }
@@ -57,7 +58,7 @@ class UserInterface {
         Matrix result = new Matrix(rows, cols);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                result.setElement(i, j, sc.nextInt());
+                result.setElement(i, j, sc.nextDouble());
             }
         }
         return result;

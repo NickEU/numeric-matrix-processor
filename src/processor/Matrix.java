@@ -3,12 +3,12 @@ package processor;
 class Matrix {
     private final int rows;
     private final int columns;
-    private final int[][] matrix;
+    private final double[][] matrix;
 
     public Matrix(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
-        matrix = new int[rows][columns];
+        matrix = new double[rows][columns];
     }
 
     int getRows() {
@@ -19,11 +19,11 @@ class Matrix {
         return columns;
     }
 
-    int getElement(int row, int col) {
+    double getElement(int row, int col) {
         return matrix[row][col];
     }
 
-    void setElement(int row, int col, int newValue) {
+    void setElement(int row, int col, double newValue) {
         matrix[row][col] = newValue;
     }
 
@@ -34,9 +34,11 @@ class Matrix {
     @Override
     public String toString() {
         var result = new StringBuilder();
-        for (int[] row : matrix) {
-            for (int el : row) {
-                result.append(el).append(" ");
+        for (double[] row : matrix) {
+            for (double el : row) {
+                result.append(Double.valueOf(el).longValue() == Math.round(el)
+                    ? String.format("%.0f", el) : el);
+                result.append(" ");
             }
             result.setLength(result.length() - 1);
             result.append("\n");
