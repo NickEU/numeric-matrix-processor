@@ -33,7 +33,8 @@ class Calculator {
     }
 
     public static Optional<Matrix> multiplyMatrices(Matrix a, Matrix b) {
-        if (a.getColumns() != b.getRows()) {
+        int colsInA = a.getColumns();
+        if (colsInA != b.getRows()) {
             return Optional.empty();
         }
         int rows = a.getRows();
@@ -43,7 +44,7 @@ class Calculator {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 double sumOfProducts = 0;
-                for (int k = 0; k < a.getColumns(); k++) {
+                for (int k = 0; k < colsInA; k++) {
                     sumOfProducts += a.getElement(i, k) * b.getElement(k, j);
                 }
                 result.setElement(i, j, sumOfProducts);

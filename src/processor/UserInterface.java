@@ -38,14 +38,15 @@ class UserInterface {
         Matrix b = readMatrixFromUser("second");
         Optional<Matrix> result = Calculator.addMatrices(a, b);
         String output = result.isEmpty() ? "ERROR" : result.get().toString();
-        System.out.println("\n" + output);
+        System.out.println("The result of addition is:\n" + output);
     }
 
     public void menuMultiplyByConstant() {
         Matrix a = readMatrixFromUser("the");
+        System.out.println("Multiplied by: ");
         double constant = parseNumber(sc.next());
         Matrix result = Calculator.multiplyMatrixByConst(a, constant);
-        System.out.println("The result of multiplication by constant is:");
+        System.out.println("The result of multiplication by a constant is:");
         System.out.println(result);
     }
 
