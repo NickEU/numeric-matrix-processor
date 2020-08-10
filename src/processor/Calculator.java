@@ -84,9 +84,11 @@ class Calculator {
     }
 
     private static void transposeSideDiag(Matrix result, Matrix toBeTransposed) {
-        for (int j = 0; j < result.getColumns(); j++) {
-            for (int i = 0; i < result.getRows(); i++) {
-                result.setElement(i, j, toBeTransposed.getElement(j, i));
+        for (int j = result.getColumns() - 1; j >= 0; j--) {
+            for (int i = result.getRows() - 1; i >= 0; i--) {
+                result.setElement(i, j, toBeTransposed.getElement
+                    (toBeTransposed.getRows() - 1 - j,
+                        toBeTransposed.getColumns() - 1 - i));
             }
         }
     }
