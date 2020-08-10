@@ -39,7 +39,7 @@ class Matrix {
     }
 
     void setElement(int row, int col, double newValue) {
-        matrix[row][col] = newValue;
+        matrix[row][col] = newValue == -0.0 ? 0 : newValue;
     }
 
     boolean isSameSizeAs(Matrix another) {
@@ -52,7 +52,8 @@ class Matrix {
         for (double[] row : matrix) {
             for (double el : row) {
                 result.append(el == (double) Math.round(el)
-                    ? String.format("%.0f", el) : el);
+                    ? String.format("%-7.0f", el)
+                    : String.format("%-7.2f", el));
                 result.append(" ");
             }
             result.setLength(result.length() - 1);
