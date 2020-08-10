@@ -12,6 +12,7 @@ class UserInterface {
             System.out.print("1. Add matrices\n" +
                 "2. Multiply matrix to a constant\n" +
                 "3. Multiply matrices\n" +
+                "4. Transpose matrix\n" +
                 "0. Exit\n" +
                 "Your choice: ");
             String userChoice = sc.next();
@@ -25,12 +26,45 @@ class UserInterface {
                 case "3":
                     menuMatrixMultiplication();
                     break;
+                case "4":
+                    menuTransposeMatrix();
+                    break;
                 case "0":
                     return;
                 default:
                     System.out.println("Error! Unknown command!");
             }
         }
+    }
+
+    private void menuTransposeMatrix() {
+        Transposition type = null;
+        do {
+            System.out.print("1. Main diagonal\n" +
+                "2. Side diagonal\n" +
+                "3. Vertical line\n" +
+                "4. Horizontal line\n" +
+                "Your choice: ");
+            String userChoice = sc.next();
+            switch (userChoice) {
+                case "1":
+                    type = Transposition.MAIN_DIAGONAL;
+                    break;
+                case "2":
+                    type = Transposition.SIDE_DIAGONAL;
+                    break;
+                case "3":
+                    type = Transposition.VERTICAL_LINE;
+                    break;
+                case "4":
+                    type = Transposition.HORIZONTAL_LINE;
+                    break;
+            }
+        } while (type == null);
+        Matrix toBeTransposed = readMatrixFromUser("the");
+        Matrix result = Calculator.transposeMatrix(toBeTransposed, type);
+        System.out.println("The result is:");
+        System.out.println(result);
     }
 
     private void menuMatrixAddition() {
