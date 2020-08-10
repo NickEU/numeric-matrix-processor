@@ -31,4 +31,25 @@ class Calculator {
         }
         return result;
     }
+
+    public static Optional<Matrix> multiplyMatrices(Matrix a, Matrix b) {
+        if (a.getColumns() != b.getRows()) {
+            return Optional.empty();
+        }
+        int rows = a.getRows();
+        int cols = b.getColumns();
+        Matrix result = new Matrix(rows, cols);
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                double sumOfProducts = 0;
+                for (int k = 0; k < a.getColumns(); k++) {
+                    sumOfProducts += a.getElement(i, k) * b.getElement(k, j);
+                }
+                result.setElement(i, j, sumOfProducts);
+            }
+        }
+
+        return Optional.of(result);
+    }
 }
