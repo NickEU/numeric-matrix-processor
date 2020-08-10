@@ -151,6 +151,33 @@ class Calculator {
     }
 
     private static Matrix getMatrixOfCofactors(Matrix input) {
-        return input;
+        int rows = input.getRows();
+        int cols = input.getColumns();
+        Matrix result = new Matrix(rows, cols);
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                boolean isNegative = row % 2 == 0 && col % 2 != 0
+                    || row % 2 != 0 && col % 2 == 0;
+                double determinant = calculateDeterminant(new Matrix(rows - 1, cols - 1, input, row, col));
+                result.setElement(row, col, isNegative ? -determinant : determinant);
+            }
+        }
+        return adjointMatrix(result);
+    }
+
+    private static Matrix adjointMatrix(Matrix input) {
+        int rows = input.getRows();
+        int cols = input.getColumns();
+        Matrix result = new Matrix(rows, cols);
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (row == col) {
+                    result.setElement(row, col, input.getElement(row, col));
+                } else {
+                    result.setElement(row, col, input.getElement(col, row));
+                }
+            }
+        }
+        return result;
     }
 }
