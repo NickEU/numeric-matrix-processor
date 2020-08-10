@@ -34,40 +34,47 @@ class UserInterface {
     }
 
     private void menuMatrixAddition() {
-        Matrix a = readMatrixFromUser();
-        Matrix b = readMatrixFromUser();
+        Matrix a = readMatrixFromUser("first");
+        Matrix b = readMatrixFromUser("second");
         Optional<Matrix> result = Calculator.addMatrices(a, b);
         String output = result.isEmpty() ? "ERROR" : result.get().toString();
         System.out.println("\n" + output);
     }
 
     public void menuMultiplyByConstant() {
-        Matrix a = readMatrixFromUser();
+        Matrix a = readMatrixFromUser("the");
         double constant = parseNumber(sc.next());
         Matrix result = Calculator.multiplyMatrixByConst(a, constant);
-        System.out.println("\n" + result);
+        System.out.println("The result of multiplication by constant is:");
+        System.out.println(result);
     }
 
     private double parseNumber(String userInput) {
-        System.out.println(userInput);
         return Double.parseDouble(userInput.contains(",")
             ? userInput.replaceAll(",", ".")
             : userInput);
     }
 
     private void menuMatrixMultiplication() {
-        System.out.println("Multiplication happens here");
+        Matrix a = readMatrixFromUser("first");
+        Matrix b = readMatrixFromUser("second");
+        Optional<Matrix> result = Calculator.multiplyMatrices(a, b);
+        String output = result.isEmpty() ? "ERROR" : result.get().toString();
+        System.out.println("The multiplication result is:\n" + output);
     }
 
-    private Matrix readMatrixFromUser() {
+    private Matrix readMatrixFromUser(String name) {
+        System.out.printf("Enter size of %s matrix: ", name);
         int rows = sc.nextInt();
         int cols = sc.nextInt();
+        System.out.printf("Enter %s matrix:\n", name);
         Matrix result = new Matrix(rows, cols);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 result.setElement(i, j, parseNumber(sc.next()));
             }
         }
+        System.out.println();
         return result;
     }
 }
