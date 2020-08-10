@@ -115,6 +115,9 @@ class Calculator {
         if (input.getColumns() != input.getRows()) {
             return Optional.empty();
         }
+        if (input.getRows() == 1) {
+            return Optional.of(input.getElement(0, 0));
+        }
         double result = calculateDeterminant(input);
         return Optional.of(result);
     }
