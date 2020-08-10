@@ -75,12 +75,22 @@ class Calculator {
         return result;
     }
 
-    private static Matrix transposeVerticalLine(Matrix result, Matrix toBeTransposed) {
-        return toBeTransposed;
+    private static void transposeVerticalLine(Matrix result, Matrix toBeTransposed) {
+        for (int row = 0; row < result.getRows(); row++) {
+            for (int col = result.getColumns() - 1; col >= 0; col--) {
+                result.setElement(row, col,
+                    toBeTransposed.getElement(row, toBeTransposed.getColumns() - 1 - col));
+            }
+        }
     }
 
-    private static Matrix transposeHorizontalLine(Matrix result, Matrix toBeTransposed) {
-        return toBeTransposed;
+    private static void transposeHorizontalLine(Matrix result, Matrix toBeTransposed) {
+        for (int row = result.getRows() - 1; row >= 0; row--) {
+            for (int col = 0; col < result.getColumns(); col++) {
+                result.setElement(row, col,
+                    toBeTransposed.getElement(toBeTransposed.getRows() - 1 - row, col));
+            }
+        }
     }
 
     private static void transposeSideDiag(Matrix result, Matrix toBeTransposed) {
