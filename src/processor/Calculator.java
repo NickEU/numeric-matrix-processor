@@ -111,7 +111,7 @@ class Calculator {
         }
     }
 
-    static Optional<Double> getDeterminant(Matrix input) {
+    static Optional<Double> getDeterminantOfMatrix(Matrix input) {
         if (input.getColumns() != input.getRows()) {
             return Optional.empty();
         }
@@ -137,5 +137,20 @@ class Calculator {
         }
 
         return result;
+    }
+
+    public static Optional<Matrix> getInverseMatrix(Matrix input) {
+        var determinant = getDeterminantOfMatrix(input);
+        if (determinant.isEmpty() || determinant.get() == 0.0) {
+            return Optional.empty();
+        }
+
+        Matrix result = multiplyMatrixByConst(getMatrixOfCofactors(input),
+            1 / determinant.get());
+        return Optional.of(result);
+    }
+
+    private static Matrix getMatrixOfCofactors(Matrix input) {
+        return input;
     }
 }
