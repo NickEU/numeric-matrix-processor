@@ -53,4 +53,8 @@ class Calculator {
 
         return Optional.of(result);
     }
+
+    public static Matrix transposeMatrix(Matrix toBeTransposed, Transposition type) {
+        return toBeTransposed;
+    }
 }
