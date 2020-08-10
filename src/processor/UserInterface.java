@@ -14,6 +14,7 @@ class UserInterface {
                 "3. Multiply matrices\n" +
                 "4. Transpose matrix\n" +
                 "5. Calculate a determinant\n" +
+                "6. Inverse matrix\n" +
                 "0. Exit\n" +
                 "Your choice: ");
             String userChoice = sc.next();
@@ -33,6 +34,8 @@ class UserInterface {
                 case "5":
                     menuCalcDeterminant();
                     break;
+                case "6":
+                    menuInverseMatrix();
                 case "0":
                     return;
                 default:
@@ -41,9 +44,18 @@ class UserInterface {
         }
     }
 
+    private void menuInverseMatrix() {
+        Matrix input = readMatrixFromUser("the");
+        Optional<Matrix> result = Calculator.getInverseMatrix(input);
+        String output = result.isEmpty()
+            ? "ERROR! The given matrix doesn't have an inverse matrix."
+            : result.get().toString();
+        System.out.println("The result is:\n" + output);
+    }
+
     private void menuCalcDeterminant() {
         Matrix input = readMatrixFromUser("the");
-        Optional<Double> result = Calculator.getDeterminant(input);
+        Optional<Double> result = Calculator.getDeterminantOfMatrix(input);
         String output = result.isEmpty()
             ? "ERROR! Can only calculate a determinant of square matrices"
             : Util.doubleToString(result.get());
