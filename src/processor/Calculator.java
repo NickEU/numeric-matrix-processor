@@ -55,47 +55,47 @@ class Calculator {
     }
 
     public static Matrix transposeMatrix(Matrix toBeTransposed, Transposition type) {
-        Matrix result = toBeTransposed;
-        switch (type) {
-            case MAIN_DIAGONAL:
-                result = transposeMainDiag(toBeTransposed);
-                break;
-            case SIDE_DIAGONAL:
-                result = transposeSideDiag(toBeTransposed);
-                break;
-            case HORIZONTAL_LINE:
-                result = transposeHorizontalLine(toBeTransposed);
-                break;
-            case VERTICAL_LINE:
-                result = transposeVerticalLine(toBeTransposed);
-                break;
-        }
-        return result;
-    }
-
-    private static Matrix transposeVerticalLine(Matrix toBeTransposed) {
-        return toBeTransposed;
-    }
-
-    private static Matrix transposeHorizontalLine(Matrix toBeTransposed) {
-        return toBeTransposed;
-    }
-
-    private static Matrix transposeSideDiag(Matrix toBeTransposed) {
-        return toBeTransposed;
-    }
-
-    private static Matrix transposeMainDiag(Matrix toBeTransposed) {
         int rows = toBeTransposed.getColumns();
         int cols = toBeTransposed.getRows();
         Matrix result = new Matrix(rows, cols);
+        switch (type) {
+            case MAIN_DIAGONAL:
+                transposeMainDiag(result, toBeTransposed);
+                break;
+            case SIDE_DIAGONAL:
+                transposeSideDiag(result, toBeTransposed);
+                break;
+            case HORIZONTAL_LINE:
+                transposeHorizontalLine(result, toBeTransposed);
+                break;
+            case VERTICAL_LINE:
+                transposeVerticalLine(result, toBeTransposed);
+                break;
+        }
+        return result;
+    }
 
-        for (int j = 0; j < cols; j++) {
-            for (int i = 0; i < rows; i++) {
+    private static Matrix transposeVerticalLine(Matrix result, Matrix toBeTransposed) {
+        return toBeTransposed;
+    }
+
+    private static Matrix transposeHorizontalLine(Matrix result, Matrix toBeTransposed) {
+        return toBeTransposed;
+    }
+
+    private static void transposeSideDiag(Matrix result, Matrix toBeTransposed) {
+        for (int j = 0; j < result.getColumns(); j++) {
+            for (int i = 0; i < result.getRows(); i++) {
                 result.setElement(i, j, toBeTransposed.getElement(j, i));
             }
         }
+    }
 
-        return result;
+    private static void transposeMainDiag(Matrix result, Matrix toBeTransposed) {
+        for (int j = 0; j < result.getColumns(); j++) {
+            for (int i = 0; i < result.getRows(); i++) {
+                result.setElement(i, j, toBeTransposed.getElement(j, i));
+            }
+        }
     }
 }
