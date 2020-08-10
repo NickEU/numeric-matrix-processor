@@ -43,9 +43,16 @@ class UserInterface {
 
     public void menuMultiplyByConstant() {
         Matrix a = readMatrixFromUser();
-        double constant = sc.nextDouble();
+        double constant = parseNumber(sc.next());
         Matrix result = Calculator.multiplyMatrixByConst(a, constant);
         System.out.println("\n" + result);
+    }
+
+    private double parseNumber(String userInput) {
+        System.out.println(userInput);
+        return Double.parseDouble(userInput.contains(",")
+            ? userInput.replaceAll(",", ".")
+            : userInput);
     }
 
     private void menuMatrixMultiplication() {
@@ -58,7 +65,7 @@ class UserInterface {
         Matrix result = new Matrix(rows, cols);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                result.setElement(i, j, sc.nextDouble());
+                result.setElement(i, j, parseNumber(sc.next()));
             }
         }
         return result;
