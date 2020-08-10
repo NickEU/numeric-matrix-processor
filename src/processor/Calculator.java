@@ -32,7 +32,7 @@ class Calculator {
         return result;
     }
 
-    public static Optional<Matrix> multiplyMatrices(Matrix a, Matrix b) {
+    static Optional<Matrix> multiplyMatrices(Matrix a, Matrix b) {
         int colsInA = a.getColumns();
         if (colsInA != b.getRows()) {
             return Optional.empty();
@@ -54,7 +54,7 @@ class Calculator {
         return Optional.of(result);
     }
 
-    public static Matrix transposeMatrix(Matrix toBeTransposed, Transposition type) {
+    static Matrix transposeMatrix(Matrix toBeTransposed, Transposition type) {
         int rows = toBeTransposed.getColumns();
         int cols = toBeTransposed.getRows();
         Matrix result = new Matrix(rows, cols);
@@ -109,5 +109,22 @@ class Calculator {
                 result.setElement(row, col, toBeTransposed.getElement(col, row));
             }
         }
+    }
+
+    static Optional<Double> getDeterminant(Matrix input) {
+        if (input.getColumns() != input.getRows()) {
+            return Optional.empty();
+        }
+        Double result = calculateDeterminant(input);
+        return Optional.of(result);
+    }
+
+    private static Double calculateDeterminant(Matrix input) {
+        if (input.getRows() == 2) {
+            return input.getElement(0, 0) * input.getElement(1, 1)
+                - input.getElement(0, 1) * input.getElement(1, 0);
+        }
+
+        return 1.0;
     }
 }

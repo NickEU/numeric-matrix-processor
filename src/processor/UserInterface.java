@@ -7,12 +7,13 @@ import java.util.Scanner;
 class UserInterface {
     private final Scanner sc = new Scanner(System.in).useLocale(Locale.US);
 
-    public void runMainMenuLoop() {
+    void runMainMenuLoop() {
         while (true) {
             System.out.print("1. Add matrices\n" +
                 "2. Multiply matrix to a constant\n" +
                 "3. Multiply matrices\n" +
                 "4. Transpose matrix\n" +
+                "5. Calculate a determinant\n" +
                 "0. Exit\n" +
                 "Your choice: ");
             String userChoice = sc.next();
@@ -29,12 +30,24 @@ class UserInterface {
                 case "4":
                     menuTransposeMatrix();
                     break;
+                case "5":
+                    menuCalcDeterminant();
+                    break;
                 case "0":
                     return;
                 default:
                     System.out.println("Error! Unknown command!");
             }
         }
+    }
+
+    private void menuCalcDeterminant() {
+        Matrix input = readMatrixFromUser("the");
+        Optional<Double> result = Calculator.getDeterminant(input);
+        String output = result.isEmpty()
+            ? "ERROR! Can only calculate a determinant of square matrices"
+            : Util.doubleToString(result.get());
+        System.out.println("The result is:\n" + output);
     }
 
     private void menuTransposeMatrix() {
@@ -75,19 +88,13 @@ class UserInterface {
         System.out.println("The result of addition is:\n" + output);
     }
 
-    public void menuMultiplyByConstant() {
+    private void menuMultiplyByConstant() {
         Matrix a = readMatrixFromUser("the");
         System.out.println("Multiplied by: ");
-        double constant = parseNumber(sc.next());
+        double constant = Util.parseNumber(sc.next());
         Matrix result = Calculator.multiplyMatrixByConst(a, constant);
         System.out.println("The result of multiplication by a constant is:");
         System.out.println(result);
-    }
-
-    private double parseNumber(String userInput) {
-        return Double.parseDouble(userInput.contains(",")
-            ? userInput.replaceAll(",", ".")
-            : userInput);
     }
 
     private void menuMatrixMultiplication() {
@@ -106,7 +113,7 @@ class UserInterface {
         Matrix result = new Matrix(rows, cols);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                result.setElement(i, j, parseNumber(sc.next()));
+                result.setElement(i, j, Util.parseNumber(sc.next()));
             }
         }
         System.out.println();
