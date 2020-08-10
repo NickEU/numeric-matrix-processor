@@ -5,10 +5,25 @@ class Matrix {
     private final int columns;
     private final double[][] matrix;
 
-    public Matrix(int rows, int columns) {
+    Matrix(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
         matrix = new double[rows][columns];
+    }
+
+    Matrix(int rows, int columns, Matrix matrix, int excludeRow, int excludeCol) {
+        this(rows, columns);
+        for (int rowNew = 0, rowOld = 0; rowNew < rows; rowNew++, rowOld++) {
+            if (rowNew == excludeRow) {
+                rowOld++;
+            }
+            for (int colNew = 0, colOld = 0; colNew < columns; colNew++, colOld++) {
+                if (colNew == excludeCol) {
+                    colOld++;
+                }
+                setElement(rowNew, colNew, matrix.getElement(rowOld, colOld));
+            }
+        }
     }
 
     int getRows() {

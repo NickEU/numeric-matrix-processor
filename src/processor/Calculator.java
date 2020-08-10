@@ -115,16 +115,24 @@ class Calculator {
         if (input.getColumns() != input.getRows()) {
             return Optional.empty();
         }
-        Double result = calculateDeterminant(input);
+        double result = calculateDeterminant(input);
         return Optional.of(result);
     }
 
-    private static Double calculateDeterminant(Matrix input) {
+    private static double calculateDeterminant(Matrix input) {
         if (input.getRows() == 2) {
             return input.getElement(0, 0) * input.getElement(1, 1)
                 - input.getElement(0, 1) * input.getElement(1, 0);
         }
+        double result = 0.0;
 
-        return 1.0;
+        for (int col = 0; col < input.getColumns(); col++) {
+            double nextDet = calculateDeterminant(
+                new Matrix(input.getRows() - 1, input.getColumns() - 1,
+                    input, 0, col));
+            result += input.getElement(0, col) * (col % 2 == 0 ? nextDet : -nextDet);
+        }
+
+        return result;
     }
 }
